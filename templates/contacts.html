@@ -1,0 +1,58 @@
+<!--Remarque à chaque fois qu'on apporte une modification et ou rectification on vient tjrs ici pour apporter et ou effectué la modification
+
+# Ceci a été ajouter pour modifier le contact line 18
+# Ceci a été ajouter lorsqu'on voulait supprimer le contact ligne 19-->
+
+<!DOCTYPE html> 
+<html>
+<head>
+    <title>Liste des contacts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Liste des contacts</h1>
+    <a href="/">Retour accueil</a> |
+    <a href="/ajouter">Ajouter un contact</a>
+    <br><br>
+
+    <!--Barre de recherche-->
+    <form method="GET" action="/contacts">
+        <input type="text" name="recherche"
+                placeholder="Recherche un contact..."
+                value="{{ recherche }}">
+        <button type="submit">🔍 Recherche</button>
+        <a href="/contacts">Tout afficher</a>
+    </form>
+    <br>
+
+    {% for contact in contacts %}
+        <div class="contact">
+            <p>{{ contact[1] }} | {{contact[2] }} | {{ contact[3] }}</p>
+            <a href="/modifier/{{ contact[0] }}">✏️ Modifier </a>  
+            <a href="/supprimer/{{ contact[0] }}">❌ Supprimer</a>
+        </div>    
+    {% endfor %}
+
+    {% if not contacts %}
+        <p>Aucun contact trouvé !</p>
+    {% endif %}
+    
+</body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash {{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<h1>Liste des contacts</h1>
+
+<p>
+    Connecté en tant que : <strong>{{ session["username"] }}</strong>
+    <a href="/">Retoun accueil</a> |
+    <a href="/ajouter">Ajouter un contact</a>
+</p>
+</html>

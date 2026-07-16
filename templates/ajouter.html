@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajouter un contact</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Ajouter un contact</h1>
+    <a href="/contacts">Retour</a>
+    <br><br>
+
+    <form method="POST" action="/ajouter">
+        <label>Nom :</label>
+        <input type="text" name="nom" 
+                pattern="[A-Za-zA-ÿ\s]+"
+                title="Le nom doit contenir uniquement des lettres"
+                placeholder="Ex: Abdoulaye"
+                required>
+        <br><br>
+
+        <label>Téléphone :</label>
+        <input type="text" name="telephone" 
+                pattern="[\+]?[0-9]{7,15}"
+                title="Le téléphone doit contenir entre 7 et 15 chiffres"
+                placeholder="Ex: +224 622000000"        
+                required>
+        <br><br>
+
+        <label>Email :</label>
+        <input type="email" name="email" 
+                placeholder="Ex: abdoulaye@gmail.com"
+                required>
+        <br><br>
+
+        <button type="submit">Ajouter</button>
+    </form>
+</body>
+</html>
